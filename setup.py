@@ -20,10 +20,10 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 setup(
     name='txgeocodio',
     version='0.1.0',
-    description='Fetch and cache address geocoding',
+    description='Simple Twisted interface to http://geocod.io',
     long_description=readme + '\n\n' + history,
     author='Trenton Broughton',
-    author_email='trenton@kindrid.com',
+    author_email='trenton@devpie.com',
     url='https://github.com/trenton42/txgeocodio',
     packages=[
         'txgeocodio',
@@ -31,8 +31,7 @@ setup(
     package_dir={'txgeocodio': 'txgeocodio'},
     include_package_data=True,
     install_requires=[
-        'treq',
-        'wrapt'
+        'treq'
     ],
     license="BSD",
     zip_safe=False,
