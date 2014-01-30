@@ -18,17 +18,17 @@ readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
-    name='txgeogodio',
+    name='txgeocodio',
     version='0.1.0',
     description='Fetch and cache address geocoding',
     long_description=readme + '\n\n' + history,
     author='Trenton Broughton',
     author_email='trenton@kindrid.com',
-    url='https://github.com/trenton42/txgeogodio',
+    url='https://github.com/trenton42/txgeocodio',
     packages=[
-        'txgeogodio',
+        'txgeocodio',
     ],
-    package_dir={'txgeogodio': 'txgeogodio'},
+    package_dir={'txgeocodio': 'txgeocodio'},
     include_package_data=True,
     install_requires=[
         'treq',
@@ -36,7 +36,7 @@ setup(
     ],
     license="BSD",
     zip_safe=False,
-    keywords='txgeogodio',
+    keywords='txgeocodio',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',

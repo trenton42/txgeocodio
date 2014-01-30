@@ -2,18 +2,18 @@
 # -*- coding: utf-8 -*-
 
 """
-test_txgeogodio
+test_txgeocodio
 ----------------------------------
 
-Tests for `txgeogodio` module.
+Tests for `txgeocodio` module.
 """
 
 from twisted.trial import unittest
 
-from txgeogodio import txgeogodio
+import txgeocodio
 
 
-class TestTxgeogodio(unittest.TestCase):
+class TestTxgeocodio(unittest.TestCase):
 
     def setUp(self):
         pass
@@ -21,5 +21,8 @@ class TestTxgeogodio(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_something(self):
-        pass
+    def test_configure(self):
+        self.assertIdentical(txgeocodio._client.config.api_key, None)
+        key = 'TESTAPIKEY'
+        txgeocodio.configure(key)
+        self.assertEqual(txgeocodio._client.config.api_key, key)
