@@ -5,7 +5,8 @@ An extremely bland Twisted client for http://geocod.io. It's really bland becaus
 
 Usage
 ------
-```
+```python
+
 import txgeocodio
 
 txgecodio.configure('YOURAPIKEYHERE')
