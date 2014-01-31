@@ -19,7 +19,7 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='txgeocodio',
-    version='0.1.0',
+    version='0.1.1',
     description='Simple Twisted interface to http://geocod.io',
     long_description=readme + '\n\n' + history,
     author='Trenton Broughton',

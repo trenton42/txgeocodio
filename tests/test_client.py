@@ -45,6 +45,7 @@ class TestClient(unittest.TestCase):
     def test_withoutconfig(self):
         c = client.Client()
         self.assertFailure(c.geocode('12345'), AttributeError)
+        self.assertFailure(c.batch(['12345']), AttributeError)
         self.assertFailure(c.parse('12345'), AttributeError)
 
     def test_geocodeError(self):
@@ -57,6 +58,30 @@ class TestClient(unittest.TestCase):
         with mock.patch(patch_module, return_value=ret):
             response = c.geocode('12345')
             self.assertFailure(response, client.AddressError)
+        return response
+
+    def test_batchError(self):
+        c = client.Client()
+        cfg = config.Config(api_key="TESTKEYTESTKEY")
+        c.config = cfg
+        return_content = '{"error": "Bad things happen"}'
+        ret = self._create_deferred(content=return_content)
+        patch_module = 'treq.client.HTTPClient.request'
+        with mock.patch(patch_module, return_value=ret):
+            response = c.batch(['12345'])
+            self.assertFailure(response, client.AddressError)
+        return response
+
+    def test_batchTypeError(self):
+        c = client.Client()
+        cfg = config.Config(api_key="TESTKEYTESTKEY")
+        c.config = cfg
+        return_content = '{"error": "Bad things happen"}'
+        ret = self._create_deferred(content=return_content)
+        patch_module = 'treq.client.HTTPClient.request'
+        with mock.patch(patch_module, return_value=ret):
+            response = c.batch('12345')
+            self.assertFailure(response, TypeError)
         return response
 
     def test_parseError(self):
@@ -103,3 +128,23 @@ class TestClient(unittest.TestCase):
             self.assertIn('address_components', response)
             self.assertIn('formatted_address', response)
 
+    @defer.inlineCallbacks
+    def test_batch(self):
+        c = client.Client()
+        cfg = config.Config(api_key="TESTKEYTESTKEY")
+        c.config = cfg
+        path = os.path.join(os.path.dirname(__file__), 'batch.json')
+        with open(path) as fp:
+            result_data = fp.read()
+
+        ret = self._create_deferred(content=result_data)
+        patch_module = 'treq.client.HTTPClient.request'
+        request = ["42370 Bob Hope Drive, Rancho Mirage CA",
+            "1290 Northbrook Court Mall, Northbrook IL",
+            "4410 S Highway 17 92, Casselberry FL",
+            "15000 NE 24th Street, Redmond WA",
+            "17015 Walnut Grove Drive, Morgan Hill CA"]
+        with mock.patch(patch_module, return_value=ret):
+            response = yield c.batch(request)
+            self.assertIsInstance(response, dict)
+            self.assertEqual(len(response), len(request))
