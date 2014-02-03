@@ -3,6 +3,11 @@
 History
 -------
 
+0.1.2 ()
+++++++++++++++++++
+
+* Fixed missing batch method in __init__.py
+
 0.1.1 ()
 ++++++++++++++++++
 
