@@ -57,7 +57,9 @@ class Client(object):
             raise TypeError('addresses must be of type list not {}'.format(addresses.__class__.__name__))
         data = json.dumps(addresses)
         endpoint = self.config.geocode_endpoint
-        result = yield treq.post(endpoint, data=data)
+        params = {'api_key': self.config.api_key}
+        headers = {'Content-Type': 'application/json'}
+        result = yield treq.post(endpoint, params=params, data=data, headers=headers)
         content = yield treq.json_content(result)
         if 'error' in content:
             raise AddressError(content['error'])
