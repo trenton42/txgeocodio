@@ -3,7 +3,7 @@
 
 __author__ = 'Trenton Broughton'
 __email__ = 'trenton@kindrid.com'
-__version__ = '0.1.0'
+__version__ = '0.1.2'
 
 from txgeocodio.client import Client, AddressError
 from txgeocodio.config import Config
@@ -16,5 +16,6 @@ _client = Client(Config())
 
 geocode = _client.geocode
 parse = _client.parse
+batch = _client.batch
 
-__all__ = ['geocode', 'parse', 'configure', 'AddressError']
+__all__ = ['geocode', 'batch', 'parse', 'configure', 'AddressError']
