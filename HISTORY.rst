@@ -3,6 +3,12 @@
 History
 -------
 
+0.1.3 ()
+++++++++++++++++++
+
+* Geocoding errors in batch mode now return an empty list for that query
+* ^^^ This will surely change in the future.
+
 0.1.2 ()
 ++++++++++++++++++
 

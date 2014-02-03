@@ -3,7 +3,7 @@
 
 __author__ = 'Trenton Broughton'
 __email__ = 'trenton@kindrid.com'
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 from txgeocodio.client import Client, AddressError
 from txgeocodio.config import Config
