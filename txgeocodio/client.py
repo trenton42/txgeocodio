@@ -65,6 +65,9 @@ class Client(object):
             raise AddressError(content['error'])
         out = {}
         for i in content['results']:
-            out[i['query']] = i['response']['results']
+            if 'error' in i['response']:
+                out[i['query']] = []
+            else:
+                out[i['query']] = i['response']['results']
 
         defer.returnValue(out)
